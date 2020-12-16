@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Musikhjälpen Sweco</title>
+      <meta charset="UTF-8">
+<meta http-equiv="refresh" content="300">
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+   </head>
+   <body>
+      <div style="padding:10px;border: 1px none black">
+               <H1 style="color:rgb(0,0,0)" class="text-center">Sweco i Stockholm har samlat in:</H1>
+               <H1 style="color:rgb(0,0,0)" class="text-center">3100</H1>
+      </div>
+      <div style="padding:10px;border: 1px none black">
+               <H1 style="color:rgb(0,0,0)" class="text-center">Sweco Architects i Region Mitt har samlat in:</H1>
+               <H1 style="color:rgb(0,0,0)" class="text-center">700</H1>
+      </div>
+      <div style="padding:10px;border: 1px none black">
+               <H1 style="color:rgb(0,0,0)" class="text-center">Sweco Architects i Göteborg har samlat in:</H1>
+               <H1 style="color:rgb(0,0,0)" class="text-center">2050</H1>
+      </div>
+      <div style="padding:10px;border: 1px none black">
+               <H1 style="color:rgb(0,0,0)" class="text-center">Sweco i Halmstad har samlat in:</H1>
+               <H1 style="color:rgb(0,0,0)" class="text-center">100</H1>
+      </div>
+      <div style="padding:10px;border: 1px none black">
+               <H1 style="color:rgb(0,0,0)" class="text-center">Totalt från Sweco:</H1>
+               <H1 style="color:rgb(0,0,0)" class="text-center">5950</H1>
+         <div style="padding:10px;border: 1px none black"><p style="color:rgb(0,0,0)" class="text-center">Refresh in  <span id="timer"></span></p></div>
+      </div>
+      <div style="padding:10px;border: 1px none black">
+               </style>
+               <div class="container-fluid">
+               	<div class="row">
+               		<div class="col-xs-8" style="text-align:center;width:100%"><canvas id="chartHTMLReportGenerator_51"></canvas></div>
+               	</div>
+               </div>
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+               <script>
+                  var ctx = document.getElementById("chartHTMLReportGenerator_51").getContext("2d");
+                  var data ={
+           "labels":[
+             "Sweco Stockholm",
+             "Sweco Architects G\u00f6teborg",
+             "Sweco Architects Region Mitt",
+             "Sweco Halmstad"
+           ],
+           "datasets":[
+             {
+               "label":"summa_MH",
+               "borderColor":"rgba(77,83,90,1)",
+               "borderWidth":2,
+               "backgroundColor":"rgba(77,83,90,0.5)",
+               "data":[
+                 "3100",
+                 "2050",
+                 "700",
+                 "100"
+               ]
+             }
+           ]
+         };
+                  var options = {
+                     animation: false,
+                     legend: {
+                         position: 'right'
+                     },
+                     scales: {
+                         xAxes: [{
+                             display: true,
+                             scaleLabel: {labelString: 'Kontor', display: true},
+                             ticks: {
+                                 autoSkip: false
+                             }
+                         }],
+                         yAxes: [{
+                             display: true,
+                             scaleLabel: {labelString: 'Summa [kr]', display: true},
+                             ticks: {
+                                 beginAtZero: true
+                             }
+                         }]
+                     },
+                     tooltips: {
+                         mode: 'index'
+                     }
+                  };
+                  var MyNewChart = new Chart(ctx, {
+                     type: 'bar',
+                     data: data,
+                     options: options
+                  });
+               </script>
+               <p style="color:rgb(0,0,0)" class="text-center">Uppdaterat: 2020-12-16  11:59</p>
+         <script>
+           document.getElementById('timer').innerHTML =
+           005 + ":" + 0;
+         startTimer();
+         function startTimer() {
+           var presentTime = document.getElementById('timer').innerHTML;
+           var timeArray = presentTime.split(/[:]+/);
+           var m = timeArray[0];
+           var s = checkSecond((timeArray[1] - 1));
+           if(s==59){m=m-1}
+           //if(m<0){alert('timer completed')}
+           
+           document.getElementById('timer').innerHTML =
+             m + ":" + s;
+           console.log(m)
+           setTimeout(startTimer, 1000);
+         }
+         function checkSecond(sec) {
+           if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+           if (sec < 0) {sec = "59"};
+           return sec;
+         }
+           </script>
+      </div>
+   </body>
+</html>
+
